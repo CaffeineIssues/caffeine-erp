@@ -5,12 +5,15 @@ Modular Enterprise resource planning developed by Caffeine Issues
 ## FrontEnd Stack
 
 React
+
 ChakraUI
 
 ## BackEnd Stack
 
 NodeJS
+
 Express
+
 Redis
 
 ## Collaborators
