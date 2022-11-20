@@ -8,6 +8,12 @@ React
 
 ChakraUI
 
+React Router DOM v6
+
+Formik
+
+Yup
+
 ## BackEnd Stack
 
 NodeJS
