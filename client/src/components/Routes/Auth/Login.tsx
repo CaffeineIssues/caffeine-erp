@@ -7,6 +7,7 @@ import {
     chakra,
     Heading,
     Image,
+    Img,
     Input,
     Select,
     Stack,
@@ -14,6 +15,7 @@ import {
     VStack,
 } from '@chakra-ui/react'
 import React from 'react'
+import Logo from '../../../assets/images/logo.png'
 
 function Login() {
     return (
@@ -27,6 +29,7 @@ function Login() {
             h="100vh"
             spacing="1rem"
         >
+            <Img src={Logo} w="60%" />
             <Card
                 direction={{ base: 'column', sm: 'row' }}
                 overflow="hidden"
