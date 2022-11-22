@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
-import { getUserByUsername, getUserById } from '../models/authModel'
+import { getUserByUsername, getUserData } from '../models/authModel'
 import AuthPayload from '../types/session'
 
 export const postCashedAuth = async function (req: Request, res: Response) {
@@ -34,7 +34,7 @@ export const postNewAuth = async function (auth: any) {
         )
         if (isSamePass) {
             const userId = potentialLogin[0].user_id
-            const returnPostClient = await getUserById(userId)
+            const returnPostClient = await getUserData(username)
             if (returnPostClient.length <= 0)
                 return { loggedIn: false, status: 'Usuario invalido!' }
 
@@ -52,8 +52,8 @@ export const postNewAuth = async function (auth: any) {
     }
 }
 
-export const fetchData = async function (userId: number) {
-    const returnPostClient = await getUserById(userId)
+export const fetchData = async function (username: string) {
+    const returnPostClient = await getUserData(username)
     const client = returnPostClient[0]
 
     return {
