@@ -1,25 +1,27 @@
 import { useNavigate } from 'react-router'
+import { Account } from '../Types/contexts/account'
+import { createContext, useEffect, useState } from 'react'
 
-const { createContext, useState, useEffect } = require('react')
+interface LoginProviderProps {
+    children: React.ReactNode
+}
 
-export const AccountContext = createContext()
+export const AccountContext = createContext({
+    user: {} as Account,
+    setUser: (user: Account) => {},
+    page: 'Titulo da Pagina',
+    setPage: (page: string) => {},
+})
 
-const UserContext = ({ children }) => {
-    const ENDPOINT = process.env.REACT_APP_BASE_URL_API_SERVER
-    let url = window.location.href
-
-    const [pic, setPic] = useState('1')
-    const [page, setPage] = useState('Titulo da Pagina')
-    const [user, setUser] = useState({
+export const UserContext = ({ children }: LoginProviderProps) => {
+    const [page, setPage] = useState('')
+    const [user, setUser] = useState<Account>({
         loggedIn: null,
         username: null,
-        device: null,
-        name: null,
-        email: null,
     })
     const navigate = useNavigate()
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BASE_URL_API_SERVER}/auth/login`, {
+        fetch(`http://localhost:4000/auth/login`, {
             credentials: 'include',
         })
             .catch((err) => {
@@ -32,7 +34,8 @@ const UserContext = ({ children }) => {
             .then((r) => {
                 console.log('2')
                 if (!r || !r.ok || r.status >= 400) {
-                    setUser((user) => {
+                    setUser((user: Account) => {
+                        console.log(user)
                         return { loggedIn: false }
                     })
                     return
@@ -42,28 +45,25 @@ const UserContext = ({ children }) => {
             .then((data) => {
                 console.log('3')
                 if (!data) {
-                    setUser((user) => {
+                    setUser((user: Account) => {
                         return { loggedIn: false }
                     })
                     return
-                }
-                setUser({ ...data })
-                if (data.id_contrato === 0) {
-                    navigate('/cadastro/plano', {
-                        state: {
-                            client_id: data.id_cliente_deovita,
-                            name: data.name,
-                            cpf: data.cpf,
-                        },
-                    })
                 } else {
+                    console.log(user)
                     navigate('/dashboard')
                 }
             })
     }, [])
+
     return (
         <AccountContext.Provider
-            value={{ user, setUser, page, setPage, pic, setPic }}
+            value={{
+                user,
+                setUser,
+                page,
+                setPage,
+            }}
         >
             {children}
         </AccountContext.Provider>

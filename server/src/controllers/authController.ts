@@ -39,7 +39,7 @@ export const postNewAuth = async function (auth: any) {
                 return { loggedIn: false, status: 'Usuario invalido!' }
 
             const client = returnPostClient[0]
-
+            console.log(returnPostClient)
             const responseData = {
                 username: username,
             }
