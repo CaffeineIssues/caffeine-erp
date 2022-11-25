@@ -13,7 +13,6 @@ import {
     Input,
     InputGroup,
     InputLeftElement,
-    InputRightElement,
     useColorModeValue,
     VStack,
 } from '@chakra-ui/react'
@@ -22,6 +21,7 @@ import React, { useState } from 'react'
 interface Module {
     props: string
 }
+
 function Menu(props: Module) {
     console.log(props)
     const [loading, setLoading] = useState(false)
@@ -68,7 +68,14 @@ function Menu(props: Module) {
                             Novo Chamado
                         </Button>
                     </VStack>
-                    <Box w="100%" height="5%">
+                    <Box
+                        w="100%"
+                        height="5%"
+                        id="menu-opt"
+                        onClick={() => {
+                            console.log('click')
+                        }}
+                    >
                         <chakra.p
                             height="100%"
                             lineHeight="100%"
@@ -79,7 +86,14 @@ function Menu(props: Module) {
                             Administração
                         </chakra.p>
                     </Box>
-                    <Box w="100%" height="5%">
+                    <Box
+                        w="100%"
+                        height="5%"
+                        id="menu-opt"
+                        onClick={() => {
+                            console.log('click')
+                        }}
+                    >
                         <chakra.p
                             height="100%"
                             lineHeight="100%"
@@ -90,7 +104,14 @@ function Menu(props: Module) {
                             Relatorios
                         </chakra.p>
                     </Box>
-                    <Box w="100%" height="5%">
+                    <Box
+                        w="100%"
+                        height="5%"
+                        id="menu-opt"
+                        onClick={() => {
+                            console.log('click')
+                        }}
+                    >
                         <chakra.p
                             height="100%"
                             lineHeight="100%"
@@ -103,47 +124,46 @@ function Menu(props: Module) {
                     </Box>
                     <Accordion w="100%" allowToggle>
                         <AccordionItem>
-                            <h2>
-                                <AccordionButton>
-                                    <Box
-                                        flex="1"
-                                        fontWeight="bold"
-                                        textAlign="left"
-                                    >
-                                        Chamados
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
-                            </h2>
+                            <AccordionButton>
+                                <Box
+                                    flex="1"
+                                    fontWeight="bold"
+                                    textAlign="left"
+                                >
+                                    Chamados
+                                </Box>
+                                <AccordionIcon />
+                            </AccordionButton>
+
                             <AccordionPanel pb={4} width="100%">
-                                <Box w="100%" height="5%" mb="2%">
+                                <Box w="100%" height="5%" id="menu-opt" mb="2%">
                                     Todos
                                 </Box>
-                                <Box w="100%" height="5%" mb="2%">
+                                <Box w="100%" height="5%" id="menu-opt" mb="2%">
                                     Aguardando Operador
                                 </Box>
-                                <Box w="100%" height="5%" mb="2%">
+                                <Box w="100%" height="5%" id="menu-opt" mb="2%">
                                     Chamados em Atraso
                                 </Box>
-                                <Box w="100%" height="5%" mb="2%">
+                                <Box w="100%" height="5%" id="menu-opt" mb="2%">
                                     Em Atendimento
                                 </Box>
-                                <Box w="100%" height="5%" mb="2%">
+                                <Box w="100%" height="5%" id="menu-opt" mb="2%">
                                     Abertos
                                 </Box>
-                                <Box w="100%" height="5%" mb="2%">
+                                <Box w="100%" height="5%" id="menu-opt" mb="2%">
                                     Fechados
                                 </Box>
-                                <Box w="100%" height="5%" mb="2%">
+                                <Box w="100%" height="5%" id="menu-opt" mb="2%">
                                     Cancelados
                                 </Box>
-                                <Box w="100%" height="5%" mb="2%">
+                                <Box w="100%" height="5%" id="menu-opt" mb="2%">
                                     Busca Avançada
                                 </Box>
                             </AccordionPanel>
                         </AccordionItem>
                     </Accordion>
-                    <Box w="100%" height="5%">
+                    <Box w="100%" height="5%" id="menu-opt">
                         <chakra.p
                             height="100%"
                             lineHeight="100%"
@@ -154,7 +174,7 @@ function Menu(props: Module) {
                             Meus Chamados
                         </chakra.p>
                     </Box>
-                    <Box w="100%" height="5%">
+                    <Box w="100%" height="5%" id="menu-opt">
                         <chakra.p
                             height="100%"
                             lineHeight="100%"

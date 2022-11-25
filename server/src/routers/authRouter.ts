@@ -38,4 +38,15 @@ router
         }
     })
 
+router.get('/logout', (req: Request, res: Response) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return console.log(err)
+        }
+        res.clearCookie('sid')
+        res.send('logged out')
+        console.log('logged out')
+    })
+})
+
 export default router

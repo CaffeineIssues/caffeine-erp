@@ -1,10 +1,13 @@
 import React from 'react'
-import { Card, useColorModeValue, VStack } from '@chakra-ui/react'
+import { Card, Text, useColorModeValue, VStack } from '@chakra-ui/react'
 
 function Content() {
     return (
         <>
             <VStack w="100%" h={900}>
+                <Text fontWeight="bold" w="97%" mt="1%">
+                    Meu Painel
+                </Text>
                 <Card
                     direction={{ base: 'column', sm: 'row' }}
                     overflow="hidden"

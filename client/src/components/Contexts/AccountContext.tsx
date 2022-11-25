@@ -32,8 +32,8 @@ export const UserContext = ({ children }: LoginProviderProps) => {
                 return
             })
             .then((r) => {
-                console.log('2')
                 if (!r || !r.ok || r.status >= 400) {
+                    console.log('2')
                     setUser((user: Account) => {
                         console.log(user)
                         return { loggedIn: false }
@@ -43,8 +43,10 @@ export const UserContext = ({ children }: LoginProviderProps) => {
                 return r.json()
             })
             .then((data) => {
+                console.log(data)
                 console.log('3')
-                if (!data) {
+                if (data.loggedIn === false) {
+                    console.log('aqui')
                     setUser((user: Account) => {
                         return { loggedIn: false }
                     })

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useContext } from 'react'
 import {
     Box,
     Flex,
@@ -19,6 +19,8 @@ import {
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import Logo from '../../assets/images/logo.png'
+import { AccountContext } from '../Contexts/AccountContext'
+import { useNavigate } from 'react-router-dom'
 
 const NavLink = ({ children }: { children: ReactNode }) => (
     <Link
@@ -36,6 +38,18 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 )
 
 export default function Nav() {
+    const { user, setUser } = useContext(AccountContext)
+    const navigate = useNavigate()
+    const handleLogout = async () => {
+        try {
+            await fetch(`http://localhost:4000/auth/logout`, {
+                method: 'GET',
+                credentials: 'include',
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
     const { colorMode, toggleColorMode } = useColorMode()
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
@@ -90,7 +104,15 @@ export default function Nav() {
                                     <MenuDivider />
                                     <MenuItem>Perfil</MenuItem>
                                     <MenuItem>Configurações</MenuItem>
-                                    <MenuItem>Logout</MenuItem>
+                                    <MenuItem
+                                        onClick={() => {
+                                            setUser({ loggedIn: false })
+                                            handleLogout()
+                                            navigate('/')
+                                        }}
+                                    >
+                                        Logout
+                                    </MenuItem>
                                 </MenuList>
                             </Menu>
                         </Stack>
