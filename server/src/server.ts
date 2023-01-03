@@ -40,13 +40,13 @@ const io = new Server<
     SocketData
 >(server, {
     cors: {
-        origin: 'http://localhost:4000',
+        origin: 'http://localhost:4000/',
     },
 })
 
 app.use(
     cors({
-        origin: 'http://localhost:4000',
+        origin: 'http://localhost:4000/',
         credentials: true,
     })
 )
