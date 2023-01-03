@@ -40,13 +40,13 @@ const io = new Server<
     SocketData
 >(server, {
     cors: {
-        origin: 'http://localhost:4000/',
+        origin: 'http://localhost:3000',
     },
 })
 
 app.use(
     cors({
-        origin: 'http://localhost:4000/',
+        origin: 'http://localhost:3000',
         credentials: true,
     })
 )
@@ -74,6 +74,7 @@ io.on('connection', handleConnect)
 
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
+app.use('/fields', fieldsRouter)
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
     console.log(error)
