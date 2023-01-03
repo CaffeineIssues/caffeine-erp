@@ -41,7 +41,12 @@ export const postNewAuth = async function (auth: any) {
             const client = returnPostClient[0]
             console.log(returnPostClient)
             const responseData = {
-                username: username,
+                user_id: client.user_id,
+                username: client.username,
+                name: client.name,
+                gender: client.gender,
+                birthdate: client.birthdate,
+                role_id: client.role_id,
             }
             return { loggedIn: true, data: responseData }
         } else {
@@ -53,10 +58,18 @@ export const postNewAuth = async function (auth: any) {
 }
 
 export const fetchData = async function (username: string) {
-    const returnPostClient = await getUserData(username)
-    const client = returnPostClient[0]
-
-    return {
-        username: client.username,
+    try {
+        const returnPostClient = await getUserData(username)
+        const client = returnPostClient[0]
+        return {
+            user_id: client.user_id,
+            username: client.username,
+            name: client.name,
+            gender: client.gender,
+            birthdate: client.birthdate,
+            role_id: client.role_id,
+        }
+    } catch (err) {
+        throw new Error()
     }
 }

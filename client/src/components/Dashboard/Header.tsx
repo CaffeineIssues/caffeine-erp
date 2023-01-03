@@ -98,7 +98,11 @@ export default function Nav() {
                                     </Center>
                                     <br />
                                     <Center>
-                                        <p>Username</p>
+                                        <p>
+                                            {user.name
+                                                ? user.name.split(' ')[0]
+                                                : ''}
+                                        </p>
                                     </Center>
                                     <br />
                                     <MenuDivider />

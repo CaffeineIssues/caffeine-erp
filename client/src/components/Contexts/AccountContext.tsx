@@ -18,6 +18,10 @@ export const UserContext = ({ children }: LoginProviderProps) => {
     const [user, setUser] = useState<Account>({
         loggedIn: null,
         username: null,
+        name: null,
+        gender: null,
+        birthdate: null,
+        role_id: null,
     })
     const navigate = useNavigate()
     useEffect(() => {
@@ -52,7 +56,7 @@ export const UserContext = ({ children }: LoginProviderProps) => {
                     })
                     return
                 } else {
-                    console.log(user)
+                    setUser(data)
                     navigate('/dashboard')
                 }
             })

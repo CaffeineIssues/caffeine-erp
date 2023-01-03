@@ -10,7 +10,7 @@ import {
 import { load } from 'ts-dotenv'
 
 const pool_caffeine = new Pool({
-    database: 'caffeine-erp',
+    database: 'caffeine_erp',
     host: 'localhost',
     password: '123456',
     user: 'postgres',
@@ -18,7 +18,7 @@ const pool_caffeine = new Pool({
 })
 
 const pool_watcher = new Client({
-    database: 'caffeine-erp',
+    database: 'caffeine_erp',
     host: 'localhost',
     password: '123456',
     user: 'postgres',

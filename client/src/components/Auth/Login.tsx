@@ -36,7 +36,7 @@ function Login() {
             h="100vh"
             spacing="1rem"
         >
-            <Img src={Logo} w="60%" />
+            <Heading w="20%">LOGO</Heading>
             <Card
                 direction={{ base: 'column', sm: 'row' }}
                 overflow="hidden"

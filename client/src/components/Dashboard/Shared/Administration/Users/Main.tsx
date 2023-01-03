@@ -1,11 +1,10 @@
 import { Box, Flex } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import Header from './Header'
-import Content from './Content'
-import HelpdeskMenu from './HelpdeskMenu'
+import HelpdeskMenu from '../../../HelpdeskMenu'
+import Header from '../../../Header'
+import React from 'react'
+import UserList from './UserList'
 
 function Main() {
-    const [module, setModule] = useState<string>('helpdesk')
     return (
         <>
             <Flex>
@@ -14,7 +13,7 @@ function Main() {
                 </Box>
                 <Box w="85%" zIndex="1" position="relative">
                     <Header />
-                    <Content />
+                    <UserList />
                 </Box>
             </Flex>
         </>

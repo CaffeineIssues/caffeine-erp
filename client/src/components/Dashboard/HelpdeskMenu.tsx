@@ -17,15 +17,12 @@ import {
     VStack,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-interface Module {
-    props: string
-}
-
-function Menu(props: Module) {
-    console.log(props)
+function Menu() {
     const [loading, setLoading] = useState(false)
     const [disabled, setDisabled] = useState(true)
+    const navigate = useNavigate()
     return (
         <>
             <Flex
@@ -68,24 +65,45 @@ function Menu(props: Module) {
                             Novo Chamado
                         </Button>
                     </VStack>
-                    <Box
-                        w="100%"
-                        height="5%"
-                        id="menu-opt"
-                        onClick={() => {
-                            console.log('click')
-                        }}
-                    >
-                        <chakra.p
-                            height="100%"
-                            lineHeight="100%"
-                            verticalAlign="middle"
-                            margin="5%"
-                            fontWeight="bold"
-                        >
-                            Administração
-                        </chakra.p>
-                    </Box>
+                    <Accordion w="100%" allowToggle>
+                        <AccordionItem>
+                            <AccordionButton>
+                                <Box
+                                    flex="1"
+                                    fontWeight="bold"
+                                    textAlign="left"
+                                >
+                                    Administração
+                                </Box>
+                                <AccordionIcon />
+                            </AccordionButton>
+
+                            <AccordionPanel pb={4} width="100%">
+                                <Box
+                                    w="100%"
+                                    height="5%"
+                                    id="menu-opt"
+                                    mb="2%"
+                                    onClick={() => {
+                                        navigate('/administration/users')
+                                    }}
+                                >
+                                    Usuários
+                                </Box>
+                                <Box
+                                    w="100%"
+                                    height="5%"
+                                    id="menu-opt"
+                                    mb="2%"
+                                    onClick={() => {
+                                        navigate('/administration/companies')
+                                    }}
+                                >
+                                    Empresas
+                                </Box>
+                            </AccordionPanel>
+                        </AccordionItem>
+                    </Accordion>
                     <Box
                         w="100%"
                         height="5%"

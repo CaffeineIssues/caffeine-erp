@@ -1,6 +1,12 @@
 import { load } from 'ts-dotenv'
 import express, { Application, Request, Response, NextFunction } from 'express'
 import session from 'express-session'
+declare module 'express-session' {
+    export interface SessionData {
+        user: { [key: string]: any }
+    }
+}
+
 import helmet from 'helmet'
 import cors from 'cors'
 import http from 'http'
@@ -14,6 +20,8 @@ import {
 import { handleConnect } from './utils/handleConnection'
 import SessionSettings from './types/session'
 import authRouter from './routers/authRouter'
+import userRouter from './routers/userRouter'
+import fieldsRouter from './routers/fieldsRouter'
 
 const { COOKIE_SECRET, ENVIRONMENT, PORT, API_NAME, BASE_URL } = load({
     COOKIE_SECRET: String,
@@ -32,13 +40,13 @@ const io = new Server<
     SocketData
 >(server, {
     cors: {
-        origin: BASE_URL,
+        origin: 'http://localhost:4000',
     },
 })
 
 app.use(
     cors({
-        origin: BASE_URL,
+        origin: 'http://localhost:4000',
         credentials: true,
     })
 )
@@ -65,10 +73,11 @@ app.use(express.json())
 io.on('connection', handleConnect)
 
 app.use('/auth', authRouter)
+app.use('/user', userRouter)
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
     console.log(error)
-    res.status(500).send('Internal Server ERror')
+    res.status(500).send('Internal Server Error')
 })
 
 server.listen(4000, () => {
