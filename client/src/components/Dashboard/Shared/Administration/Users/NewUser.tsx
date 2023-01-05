@@ -18,17 +18,23 @@ import { Formik, Form } from 'formik'
 import TextField from '../../../../Utils/TextField'
 import * as Yup from 'yup'
 import { NewUserData } from '../../../../Types/users/user'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AccountContext } from '../../../../Contexts/AccountContext'
+import { Account } from '../../../../Types/contexts/account'
 
 interface Props {
     modalStatus: boolean
 }
 
 function NewUser() {
+    const { user, setUser } = useContext(AccountContext)
     const disclosure = useDisclosure()
+    const navigate = useNavigate()
     const [companies, setCompanies] = useState<any[]>()
     const [roles, setRoles] = useState<any[]>([])
     const [departments, setDepartments] = useState<any[]>([])
+    const [success, setSuccess] = useState<boolean>(false)
 
     const fetchFields = async () => {
         const request = await fetch('http://localhost:4000/fields/new-user/0', {
@@ -89,25 +95,25 @@ function NewUser() {
                         <Formik
                             initialValues={{
                                 name: '',
-                                department: '',
-                                role: '',
-                                company: '',
+                                department_id: '',
+                                role_id: '',
+                                company_id: '',
                                 email: '',
-                                date: '',
+                                birthdate: '',
                                 gender: '',
                             }}
                             onSubmit={(values, actions) => {
                                 const vals: NewUserData = {
                                     name: values.name,
-                                    department: values.department,
-                                    role: values.role,
-                                    company: values.company,
+                                    department_id: values.department_id,
+                                    role_id: values.role_id,
+                                    company_id: values.company_id,
                                     email: values.email,
-                                    date: values.date,
+                                    birthdate: values.birthdate,
                                     gender: values.gender,
                                 }
                                 console.log(vals)
-                                actions.resetForm()
+
                                 fetch('http://localhost:4000/user', {
                                     method: 'POST',
                                     credentials: 'include',
@@ -131,13 +137,6 @@ function NewUser() {
                                     })
                                     .then((data) => {
                                         if (!data) return
-                                        console.log(data)
-                                        if (data.status) {
-                                            //setError(data.status)
-                                        } else if (data.loggedIn) {
-                                            //console.log(data)
-                                            //navigate('/dashboard')
-                                        }
                                     })
                             }}
                         >
@@ -151,26 +150,24 @@ function NewUser() {
                                     />
                                     <HStack w="100%">
                                         <Select
-                                            name="department"
+                                            name="department_id"
                                             placeholder="Setor"
                                             onChange={(e) => {
                                                 props.setFieldValue(
-                                                    'deparment',
-                                                    e.target.selectedOptions[0]
-                                                        .value
+                                                    'department_id',
+                                                    e.target.selectedOptions[0].value.toString()
                                                 )
                                             }}
                                         >
                                             {useDepartments}
                                         </Select>
                                         <Select
-                                            name="role"
+                                            name="role_id"
                                             placeholder="Função"
                                             onChange={(e) => {
                                                 props.setFieldValue(
-                                                    'role',
-                                                    e.target.selectedOptions[0]
-                                                        .value
+                                                    'role_id',
+                                                    e.target.selectedOptions[0].value.toString()
                                                 )
                                             }}
                                         >
@@ -178,13 +175,12 @@ function NewUser() {
                                         </Select>
                                     </HStack>
                                     <Select
-                                        name="company"
+                                        name="company_id"
                                         placeholder="Empresa"
                                         onChange={(e) => {
                                             props.setFieldValue(
-                                                'company',
-                                                e.target.selectedOptions[0]
-                                                    .value
+                                                'company_id',
+                                                e.target.selectedOptions[0].value.toString()
                                             )
                                         }}
                                     >
@@ -198,7 +194,7 @@ function NewUser() {
                                     />
                                     <HStack w="100%">
                                         <TextField
-                                            name="date"
+                                            name="birthdate"
                                             type="date"
                                             placeholder="Data de Nascimento"
                                             required
@@ -209,8 +205,7 @@ function NewUser() {
                                             onChange={(e) => {
                                                 props.setFieldValue(
                                                     'gender',
-                                                    e.target.selectedOptions[0]
-                                                        .value
+                                                    e.target.selectedOptions[0].value.toString()
                                                 )
                                             }}
                                         >

@@ -1,9 +1,9 @@
 export interface NewUserData {
     name: string
-    department: string
-    role: string
-    company: string
+    department_id: string
+    role_id: string
+    company_id: string
     email: string
-    date: string
+    birthdate: string
     gender: string
 }

@@ -1,3 +1,4 @@
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import {
     Button,
     Card,
@@ -16,10 +17,12 @@ import {
     useColorModeValue,
     VStack,
 } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { AccountContext } from '../../../../Contexts/AccountContext'
 import NewUser from './NewUser'
 
 function UserList() {
+    const { user } = useContext(AccountContext)
     const empresa_id: number = 0
     const [userList, setUserList] = useState([])
     const [newUser, setNewUser] = useState(false)
@@ -41,7 +44,7 @@ function UserList() {
     }
     useEffect(() => {
         fetchUsers(empresa_id)
-    }, [])
+    }, [user])
 
     const useList = userList.map((user, index) => {
         return (
@@ -53,7 +56,9 @@ function UserList() {
                     <Td>{user['role_description']}</Td>
                     <Td>{user['company']}</Td>
                     <Td>{user['email']}</Td>
-                    <Td>actions</Td>
+                    <Td>
+                        <EditIcon /> <DeleteIcon />
+                    </Td>
                 </Tr>
             </>
         )

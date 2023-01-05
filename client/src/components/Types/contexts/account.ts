@@ -5,4 +5,5 @@ export interface Account {
     gender?: string | null
     birthdate?: string | null
     role_id?: number | null
+    aux?: string | null
 }

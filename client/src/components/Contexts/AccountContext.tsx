@@ -22,6 +22,7 @@ export const UserContext = ({ children }: LoginProviderProps) => {
         gender: null,
         birthdate: null,
         role_id: null,
+        aux: null,
     })
     const navigate = useNavigate()
     useEffect(() => {

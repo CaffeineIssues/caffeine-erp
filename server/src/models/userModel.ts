@@ -5,6 +5,7 @@ const { caffeine } = pools
 export const createUser = async (user: UserData) => {
     try {
         const { name, gender, birthdate, email, role_id, company_id } = user
+
         const queryStr: string = `
         INSERT INTO adm.user 
         (name,gender, birthdate, email, role_id, company_id) 
