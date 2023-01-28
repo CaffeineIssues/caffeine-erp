@@ -1,6 +1,6 @@
 # caffeine-erp
 
-Modular Enterprise resource planning developed by Caffeine Issues
+Modular Enterprise resource planning practice project system
 
 ## FrontEnd Stack
 
